@@ -1,0 +1,24 @@
+<div class="fixed-container">
+  <div class="navbar">
+    <li>
+      <a ng-mouseover="showControls()">Controls</a>
+      <div ui-view="controls"></div>
+    </li>
+    <li>
+      <a ng-mouseover="showSettings()">Settings</a>
+      <div ui-view="about"></div>
+    </li>
+    <li>
+      <a ng-mouseove="showAbout()">About</a>
+      <div ui-view="settings"></div>
+    </li>
+    <button ng-click="launchFullScreen()">Full Screen</button>
+  </div>
+  <div class="navigation">
+    <div class="boundary">
+      <div class="box-view" box="{{navigatorBox.x}}" draggable="true" navigator-box="navigatorBox">
+      </div>
+    </div>
+  </div>
+  <canvas class="canvas" zoomable ng-mousemove="mouseMove($event)"  msd-wheel="mouseWheel($event, $delta, $deltaX, $deltaY)" gol-canvas="gol" id="life" width="2048px" height="1024px"></canvas>
+</div>
