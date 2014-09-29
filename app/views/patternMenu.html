@@ -1,0 +1,11 @@
+<div class="pattern-menu">
+	<span class="current-pattern">{{currentPattern}}</span>
+	<div class="search-bar">
+		<input type="text" ng-model="search"/>
+	</div>
+	<div class="list">
+		<div class="item" ng-repeat="pattern in patterns|filter:search" ng-click="selectPattern(pattern)">
+			{{pattern}}
+		</div>
+	</div>
+</div>

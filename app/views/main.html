@@ -1,8 +1,8 @@
 <div class="fixed-container">
   <div class="navbar">
     <li>
-      <a ng-mouseover="showControls()">Controls</a>
-      <div ui-view="controls"></div>
+      <a ng-mouseover="toggleControls(true)" ng-mouseleave="toggleControls(false)">Controls</a>
+        <controls-menu ng-show="showControls"></controls-menu>
     </li>
     <li>
       <a ng-mouseover="showSettings()">Settings</a>
@@ -20,5 +20,6 @@
       </div>
     </div>
   </div>
-  <canvas class="canvas" zoomable ng-mousemove="mouseMove($event)"  msd-wheel="mouseWheel($event, $delta, $deltaX, $deltaY)" gol-canvas="gol" id="life" width="2048px" height="1024px"></canvas>
+  <pattern-select></pattern-select>
+  <canvas class="canvas" zoomable ng-mousemove="mouseMove($event)"  msd-wheel="mouseWheel($event, $delta, $deltaX, $deltaY)" gol-canvas="gol" current-pattern="currentPattern" id="life" gol-pixel-size="1" width="2048px" height="1024px"></canvas>
 </div>

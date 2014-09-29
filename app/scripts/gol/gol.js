@@ -187,6 +187,12 @@ GOL.prototype.poke = function(x, y, state) {
     return this;
 };
 
+GOL.prototype.pattern=function(bitArray,x,y,w,h){
+    var gl=this.igloo.gl;
+    this.textures.front.subset(bitArray,x,y,w,h);
+    return this;
+}
+
 /**
  * @returns {Object} Boolean array-like of the simulation state
  */

@@ -7,18 +7,25 @@
  * # golCanvas
  */
 angular.module('golApp')
-  .directive('golCanvas', function ($document) {
+  .directive('golCanvas', function ($document,RLE) {
   	function Link(scope,element,attrs) {
   		var $canvas = element;
   		var _this = element;
 	    _this.gol=gol;
-  		var gol = new GOL($canvas[0],4).draw().start(); //jshint ignore:line
+  		var gol = new GOL($canvas[0],attrs.golPixelSize).draw().start(); //jshint ignore:line
 	    element.drag = null;
 	    $canvas.on('mousedown', function(event) {
-	        _this.drag = event.which;
 	        var pos = gol.eventCoord(event);
-	        gol.poke(pos[0], pos[1], _this.drag === 1);
-	        gol.draw();
+	        if(event.which===1){
+	        	_this.drag = event.which;
+	        	gol.poke(pos[0], pos[1], _this.drag === 1);
+	        	gol.draw();
+	        }else if(event.which===3){
+	        	RLE.getPattern(scope.currentPattern,function(array,width,height){
+	        		gol.pattern(array,pos[0],pos[1],width,height);
+	        		gol.draw();
+	        	});
+	        }
 	    });
 	    $canvas.on('mouseup', function(event) {
 	        _this.drag = null;
@@ -35,7 +42,6 @@ angular.module('golApp')
 	        return false;
 	    });
 	    scope.$watch('navigatorBox',function(){
-	    	console.log('watch navigator box',scope.navigatorBox);
 	    });
 	    $document.on('keyup', function(event) {
 	        switch (event.which) {

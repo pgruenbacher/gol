@@ -8,10 +8,13 @@
  * Controller of the golApp
  */
 angular.module('golApp')
-  .controller('MainCtrl', function ($scope) {
+  .controller('MainCtrl', function ($scope,RLE) {
   	$scope.showControls=false;
   	$scope.showSettings=false;
   	$scope.showAbout=false;
+  	$scope.showPatterns=false;
+  	$scope.patterns=RLE.getList();
+  	$scope.currentPattern='101';
     $scope.canvas={width: '4096',height:'2048'};
    	$scope.navigatorBox={
    		scale:1,
@@ -30,6 +33,9 @@ angular.module('golApp')
 	    element.webkitRequestFullScreen();
 	  }
 	}
+	$scope.selectPattern=function(id){
+		$scope.currentPattern=id;
+	}
 	$scope.launchFullScreen=function(){
 		// Launch fullscreen for browsers that support it!
 		launchFullScreen(document.documentElement); // the whole page
@@ -43,8 +49,8 @@ angular.module('golApp')
 			height:clientRect.height
 		};
 	};
-	$scope.toggleControls=function(){
-		$scope.showControls = !$scope.showControls;
+	$scope.toggleControls=function(bool){
+		$scope.showControls = bool;
 	};
 	$scope.toggleSettings=function(){
 		$scope.showSettings = !$scope.showSettings;
